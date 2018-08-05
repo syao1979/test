@@ -1,0 +1,26 @@
+.square{
+	width: 40px;
+	height: 40px;
+	/*border: 0px solid;*/
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 0px;
+	outline: 0;	/* remove the dashed dotted lines when is active; NOT WORKING! */
+}
+
+#tictactoe-board-div{
+	padding: 10px;
+	display: inline-block; /* this make the div with fit with content, also cenceterize */
+	outline: 0;	/* remove the dashed dotted lines when is active; NOT WORKING! */
+	/*border: 1px solid gray;*/
+}
+
+#tictactoe-board{
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+.board-row, .board-td{
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
