@@ -43,11 +43,23 @@ function Reset(props) {
 }
 
 class Board extends Component {
+
+
   constructor(props) {
     super(props);
+    this.tiles = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
     this.state = {
       squares: Array(9).fill(null),
-      xIsNext: true,
+      // xIsNext: true,
     };
   }
 
@@ -68,33 +80,76 @@ class Board extends Component {
     })
   }
 
+  makeMove(squares, i, robat=false) {
+      // const squares = this.state.squares.slice();
+      let symbal = 'X';
+      if (robat){
+        symbal = 'O';
+      }
+      console.log(`${symbal}; ${i}`);
+      squares[i] = symbal; 
+      this.setState({
+        squares: squares,
+      });
+      // return squares
+  }
+
   handleClick(i) {
-    const squares = this.state.squares.slice();
+    let squares = this.state.squares.slice();
     if (this.calculateWinner(squares) || squares[i]) {
       return; // if has winner or sq already used, do nothing
     }
+    // if (this.calculateWinner(this.state.squares) || this.state.squares[i]) {
+    //   return; // if has winner or sq already used, do nothing
+    // }
+    this.makeMove(squares, i);
 
+    if (!this.calculateWinner(squares)) {
+      const idx = this.randomPickNextTile(squares);
+      this.makeMove(squares, idx, true); 
+    }
+
+    // this is the user's move
+    // squares[i] = 'X'; //this.state.xIsNext ? 'X' : 'O';
+    // this.setState({
+    //   squares: squares,
+    //   // xIsNext: !this.state.xIsNext,
+    // });
+
+    // robat's move
+    // const idx = this.randomPickNextTile(squares)
+    // squares[idx] = 'O'; 
+    // this.setState({
+    //   squares: squares,
+    // });
+
+  }
+
+  randomPickNextTile(squares){
+    const index = (max)=>Math.floor(Math.random() * max)  // randomly gen 0..max 
+    // const squares = this.state.squares;
+    const avail_tile = []
+    for (let i = 0; i < 3; i++) {
+      const row = this.tiles[i];
+      for (let idx of row){
+        if ( !squares[idx] &&  !(idx in avail_tile) ){
+            avail_tile.push(idx)
+        }
+      }
+    }
     
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext,
-    });
+    
+    const idx = avail_tile[index(avail_tile.length-1)]
+    console.dir(avail_tile)
+    console.log(`random idx = ${idx}`)
+    return idx
+
   }
 
   calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
+
+    for (let i = 0; i < this.tiles.length; i++) {
+      const [a, b, c] = this.tiles[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         return squares[a];
       }
@@ -108,7 +163,7 @@ class Board extends Component {
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = 'You put X'
     }
 
     return (

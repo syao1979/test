@@ -4,13 +4,13 @@
 
 .App-logo {
   animation: App-logo-spin infinite 1s linear; /* ori 20s */
-  height: 80px;
+  height: 40px;
 }
 
 .App-header {
   background-color: #aaa;
-  height: 150px;
-  padding: 20px;
+  height: 80px;
+  padding: 10px;
   color: white;
 }
 
@@ -25,4 +25,15 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+#potrait{
+  position : absolute;
+  top : 10px;
+  left : 10px;
+  
+}
+
+.personal-logo{
+  border-radius: 50%; /* rounded image*/
 }

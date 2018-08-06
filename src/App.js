@@ -16,7 +16,12 @@ class App extends Component {
 
           <img src={require('./images/yinyang.png')} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to the fun site</h1>
+
         </header>
+        <div id="potrait">
+          <img src={require('./images/head.png')} width="80px" height="80px" className="personal-logo" alt="owner" />
+        </div>
+
         {/*
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
