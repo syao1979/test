@@ -13,5 +13,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "node scripts/server"
-  }
+  },
+  "homepage" : "http://syao1979.github.io/test"
 }
