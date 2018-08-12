@@ -6,6 +6,9 @@
 	vertical-align: middle;
 	padding: 0px;
 	outline: 0;	/* remove the dashed dotted lines when is active; NOT WORKING! */
+	
+    /*background-color:grey;*/	 /*this make a push-button like ui */
+   /* display: block;*/
 }
 
 #tictactoe-board-div{
@@ -16,7 +19,7 @@
 }
 
 #tictactoe-board{
-	border: 1px solid gray;
+	/*border: 1px solid gray;*/
 	border-collapse: collapse;
 }
 
